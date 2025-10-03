@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Enfants - Espace Tuteur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --secondary: #10B981;
+            --danger: #EF4444;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --light-gray: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #F3F4F6;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .profile-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .children-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .child-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 25px 20px;
+            border: 1px solid var(--light-gray);
+            position: relative;
+        }
+
+        .child-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            background: var(--danger);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .child-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-gray);
+            margin: 0 auto 15px;
+            transition: all 0.3s ease;
+        }
+
+        .child-card:hover .child-avatar {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .child-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .child-class {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4338CA;
+        }
+
+        .add-child-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border: 2px dashed var(--light-gray);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 40px 20px;
+            min-height: 300px;
+        }
+
+        .add-child-card:hover {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        .add-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .add-child-card:hover .add-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .add-child-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .page-subtitle {
+                font-size: 1rem;
+            }
+
+            .children-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 30px auto 0;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .children-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="logo">
+            <i class="fas fa-fairy"></i>
+            <h1>Petit Lutin</h1>
+        </a>
+        <div class="user-menu">
+            <div class="profile">
+                <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Profil" class="profile-img">
+                <span class="profile-name">Sophie Martin</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Mes Enfants</h1>
+            <p class="page-subtitle">Sélectionnez un enfant pour accéder à son espace personnel et suivre sa scolarité</p>
+        </div>
+
+        <div class="children-grid" id="childrenList">
+            <!-- Children will be dynamically inserted here -->
+        </div>
+
+        <div class="children-grid">
+            <div class="add-child-card" onclick="addChild()">
+                <div class="add-icon">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="add-child-text">Ajouter un enfant</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; <span id="currentYear">2024</span> Petit Lutin - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample data
+            const children = [
+                { 
+                    id: 1, 
+                    name: 'Lucas Martin', 
+                    class: 'CM1 A', 
+                    avatar: 'https://randomuser.me/api/portraits/boys/32.jpg',
+                    hasNotification: true
+                },
+                { 
+                    id: 2, 
+                    name: 'Emma Martin', 
+                    class: 'CE2 B', 
+                    avatar: 'https://randomuser.me/api/portraits/girls/44.jpg',
+                    hasNotification: false
+                },
+                { 
+                    id: 3, 
+                    name: 'Hugo Martin', 
+                    class: 'CP A', 
+                    avatar: 'https://randomuser.me/api/portraits/boys/22.jpg',
+                    hasNotification: true
+                }
+            ];
+
+            const childrenList = document.getElementById('childrenList');
+
+            // Display children
+            function displayChildren() {
+                childrenList.innerHTML = '';
+                
+                children.forEach(child => {
+                    const childCard = document.createElement('div');
+                    childCard.className = 'child-card';
+                    
+                    childCard.innerHTML = `
+                        ${child.hasNotification ? '<div class="notification-badge"></div>' : ''}
+                        <img src="${child.avatar}" alt="${child.name}" class="child-avatar">
+                        <h3 class="child-name">${child.name}</h3>
+                        <p class="child-class">${child.class}</p>
+                        <a href="enfant.html?id=${child.id}" class="btn btn-primary">
+                            <i class="fas fa-user-graduate"></i> Voir le profil
+                        </a>
+                    `;
+                    
+                    childrenList.appendChild(childCard);
+                });
+            }
+
+            // Add new child
+            window.addChild = function() {
+                // In a real app, this would open a form to add a new child
+                alert('Fonctionnalité d\'ajout d\'un enfant');
+            };
+
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Initialize the page
+            displayChildren();
+        });
+    </script>
+</body>
+</html>

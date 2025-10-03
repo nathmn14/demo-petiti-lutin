@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Enfant - Petit Lutin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --secondary: #10B981;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --light-gray: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #F3F4F6;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            border: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .child-header-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .child-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .child-info h2 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+
+        .child-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .welcome-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-gray);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .option-header {
+            padding: 25px 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .option-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .option-icon.grades {
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+        }
+
+        .option-icon.homework {
+            background: linear-gradient(135deg, #F59E0B, #F97316);
+        }
+
+        .option-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .option-subtitle {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .option-details {
+            padding: 20px 25px;
+        }
+
+        .option-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .grades .stat-value {
+            color: #6366F1;
+        }
+
+        .homework .stat-value {
+            color: #F59E0B;
+        }
+
+        .progress-container {
+            margin-top: 15px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .progress-title {
+            color: var(--dark);
+        }
+
+        .progress-percent {
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .grades .progress-fill {
+            background: linear-gradient(90deg, #8B5CF6, #6366F1);
+            width: 75%;
+        }
+
+        .homework .progress-fill {
+            background: linear-gradient(90deg, #F59E0B, #F97316);
+            width: 60%;
+        }
+
+        .btn-view {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: var(--light);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-gray);
+        }
+
+        .btn-view:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .recent-activity {
+            margin-top: 50px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-list {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid var(--light-gray);
+        }
+
+        .activity-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+
+        .activity-meta {
+            font-size: 0.85rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-time {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .header-content {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .child-header-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 30px auto 0;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="accueil-simple.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="child-header-info">
+                <img src="https://randomuser.me/api/portraits/boys/32.jpg" alt="Enfant" class="child-avatar" id="childAvatar">
+                <div class="child-info">
+                    <h2 id="childName">Lucas Martin</h2>
+                    <p id="childClass">CM1 A</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="welcome-section">
+            <h1 class="welcome-title">Bienvenue sur l'espace de Lucas</h1>
+            <p class="welcome-subtitle">Consultez les notes, les devoirs et le suivi scolaire de votre enfant</p>
+        </div>
+
+        <div class="options-grid">
+            <!-- Notes et Évaluations -->
+            <div class="option-card grades" onclick="window.location.href='notes.html?id=1'">
+                <div class="option-header">
+                    <div class="option-icon grades">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div>
+                        <h3 class="option-title">Notes et Évaluations</h3>
+                        <p class="option-subtitle">Consultez les notes et évaluations</p>
+                    </div>
+                </div>
+                <div class="option-details">
+                    <div class="option-stats">
+                        <div class="stat-item">
+                            <div class="stat-value grades">15.5</div>
+                            <div class="stat-label">Moyenne</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Nouvelles notes</div>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span class="progress-title">Progression</span>
+                            <span class="progress-percent">75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <a href="notes.html?id=1" class="btn-view">
+                        <i class="fas fa-arrow-right"></i> Voir toutes les notes
+                    </a>
+                </div>
+            </div>
+
+            <!-- Travaux et Devoirs -->
+            <div class="option-card homework" onclick="window.location.href='travaux.html?id=1'">
+                <div class="option-header">
+                    <div class="option-icon homework">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div>
+                        <h3 class="option-title">Travaux et Devoirs</h3>
+                        <p class="option-subtitle">Devoirs à faire et rendus</p>
+                    </div>
+                </div>
+                <div class="option-details">
+                    <div class="option-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">À rendre</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">En retard</div>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span class="progress-title">Complétion</span>
+                            <span class="progress-percent">60%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <a href="travaux.html?id=1" class="btn-view">
+                        <i class="fas fa-arrow-right"></i> Voir les travaux
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-activity">
+            <h2 class="section-title">
+                <i class="fas fa-clock"></i>
+                Activité récente
+            </h2>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="activity-details">
+                        <div class="activity-title">Nouvelle évaluation de Mathématiques</div>
+                        <div class="activity-meta">
+                            <span class="activity-time">
+                                <i class="far fa-clock"></i> Il y a 2 heures
+                            </span>
+                            <span>Note: 16/20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: rgba(245, 158, 11, 0.1); color: #F59E0B;">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="activity-details">
+                        <div class="activity-title">Devoir de Français à rendre pour demain</div>
+                        <div class="activity-meta">
+                            <span class="activity-time">
+                                <i class="far fa-clock"></i> Hier
+                            </span>
+                            <span style="color: var(--danger);">
+                                <i class="fas fa-exclamation-circle"></i> À faire
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="activity-details">
+                        <div class="activity-title">Devoir de Sciences rendu</div>
+                        <div class="activity-meta">
+                            <span class="activity-time">
+                                <i class="far fa-clock"></i> Il y a 3 jours
+                            </span>
+                            <span style="color: var(--secondary);">
+                                <i class="fas fa-check"></i> Terminé
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; <span id="currentYear">2024</span> Petit Lutin - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupérer l'ID de l'enfant depuis l'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const childId = urlParams.get('id');
+
+            // Données des enfants (à remplacer par une requête API en production)
+            const children = {
+                '1': {
+                    name: 'Lucas Martin',
+                    class: 'CM1 A',
+                    avatar: 'https://randomuser.me/api/portraits/boys/32.jpg',
+                    average: '15.5',
+                    newGrades: 3,
+                    progress: 75,
+                    pendingWork: 5,
+                    lateWork: 2,
+                    completion: 60
+                },
+                '2': {
+                    name: 'Emma Martin',
+                    class: 'CE2 B',
+                    avatar: 'https://randomuser.me/api/portraits/girls/44.jpg',
+                    average: '16.2',
+                    newGrades: 1,
+                    progress: 85,
+                    pendingWork: 3,
+                    lateWork: 0,
+                    completion: 75
+                },
+                '3': {
+                    name: 'Hugo Martin',
+                    class: 'CP A',
+                    avatar: 'https://randomuser.me/api/portraits/boys/22.jpg',
+                    average: '14.8',
+                    newGrades: 2,
+                    progress: 65,
+                    pendingWork: 4,
+                    lateWork: 1,
+                    completion: 50
+                }
+            };
+
+            // Mettre à jour les informations de l'enfant
+            const child = children[childId] || children['1'];
+            
+            document.getElementById('childName').textContent = child.name;
+            document.getElementById('childClass').textContent = child.class;
+            document.getElementById('childAvatar').src = child.avatar;
+            document.querySelector('.welcome-title').textContent = `Bienvenue sur l'espace de ${child.name.split(' ')[0]}`;
+
+            // Mettre à jour les statistiques
+            document.querySelector('.grades .stat-value:first-child').textContent = child.average;
+            document.querySelector('.grades .stat-value:last-child').textContent = child.newGrades;
+            document.querySelector('.grades .progress-percent').textContent = `${child.progress}%`;
+            document.querySelector('.grades .progress-fill').style.width = `${child.progress}%`;
+
+            document.querySelector('.homework .stat-value:first-child').textContent = child.pendingWork;
+            document.querySelector('.homework .stat-value:last-child').textContent = child.lateWork;
+            document.querySelector('.homework .progress-percent').textContent = `${child.completion}%`;
+            document.querySelector('.homework .progress-fill').style.width = `${child.completion}%`;
+
+            // Mettre à jour les liens avec l'ID de l'enfant
+            document.querySelectorAll('a[href^="notes.html"], a[href^="travaux.html"]').forEach(link => {
+                const href = link.getAttribute('href').split('?')[0];
+                link.setAttribute('href', `${href}?id=${childId}`);
+            });
+
+            // Mettre à jour l'année dans le footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

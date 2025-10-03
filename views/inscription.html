@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Petit Lutin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4A45B1;
+            --accent: #FF6584;
+            --light: #F8F9FF;
+            --dark: #2D3748;
+            --gray: #A0AEC0;
+            --success: #48BB78;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: 10%;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent);
+            bottom: 10%;
+            right: -50px;
+            animation-delay: 2s;
+            animation-duration: 25s;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--secondary);
+            top: 40%;
+            right: 15%;
+            animation-delay: 4s;
+            animation-duration: 30s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, 20px) rotate(5deg); }
+            50% { transform: translate(0, 40px) rotate(0deg); }
+            75% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        .register-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s forwards;
+            margin: 20px 0;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo i {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .logo h1 {
+            color: var(--dark);
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            color: var(--dark);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--light);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            background-color: #F8FAFC;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+            outline: none;
+        }
+
+        .form-control:focus + i {
+            color: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            flex: 1;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-link {
+            background: none;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #E2E8F0;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation for form groups */
+        .form-group {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .register-container {
+                padding: 30px 20px;
+                margin: 0 15px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .logo i {
+                font-size: 40px;
+            }
+
+            .logo h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* Custom select styling */
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            pointer-events: none;
+        }
+
+        .form-control.select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            background: rgba(72, 187, 120, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="register-container">
+        <div class="logo">
+            <i class="fas fa-fairy"></i>
+            <h1>Petit Lutin</h1>
+            <p>Inscription</p>
+        </div>
+
+        <div id="successMessage" class="success-message">
+            <i class="fas fa-check-circle"></i> Inscription réussie ! Redirection en cours...
+        </div>
+
+        <form id="registrationForm" class="registration-form">
+            <!-- Informations de l'enfant -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-child"></i>
+                    Informations de l'enfant
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group" style="animation-delay: 0.1s">
+                        <input type="text" id="childName" class="form-control" placeholder="Nom complet" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="animation-delay: 0.2s">
+                        <div class="select-wrapper">
+                            <select id="class" class="form-control select" required>
+                                <option value="" disabled selected>Sélectionnez une classe</option>
+                                <option value="petite-section">Petite section</option>
+                                <option value="moyenne-section">Moyenne section</option>
+                                <option value="grande-section">Grande section</option>
+                                <option value="cp">CP</option>
+                                <option value="ce1">CE1</option>
+                                <option value="ce2">CE2</option>
+                                <option value="cm1">CM1</option>
+                                <option value="cm2">CM2</option>
+                            </select>
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="animation-delay: 0.3s">
+                        <input type="text" id="address" class="form-control" placeholder="Adresse complète" required>
+                        <i class="fas fa-home"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informations du tuteur -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-user-tie"></i>
+                    Informations du tuteur
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group" style="animation-delay: 0.4s">
+                        <input type="text" id="guardianName" class="form-control" placeholder="Nom complet du tuteur" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="animation-delay: 0.5s">
+                        <input type="tel" id="phone" class="form-control" placeholder="Téléphone" required>
+                        <i class="fas fa-phone"></i>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="animation-delay: 0.6s">
+                        <input type="email" id="email" class="form-control" placeholder="Adresse email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="connexion.html" class="btn btn-link">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    S'inscrire <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </form>
+
+        <div class="form-footer">
+            Vous avez déjà un compte ? <a href="connexion.html">Connectez-vous ici</a>
+        </div>
+    </div>
+
+    <script>
+        // Animation for form groups
+        document.addEventListener('DOMContentLoaded', function() {
+            const formGroups = document.querySelectorAll('.form-group');
+            formGroups.forEach((group, index) => {
+                group.style.animationDelay = `${0.1 * (index + 1)}s`;
+            });
+
+            // Form submission
+            const form = document.getElementById('registrationForm');
+            const successMessage = document.getElementById('successMessage');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                form.style.display = 'none';
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    // Here you would typically send the form data to your server
+                    console.log('Form submitted:', {
+                        childName: document.getElementById('childName').value,
+                        class: document.getElementById('class').value,
+                        address: document.getElementById('address').value,
+                        guardianName: document.getElementById('guardianName').value,
+                        phone: document.getElementById('phone').value,
+                        email: document.getElementById('email').value
+                    });
+                    
+                    // Redirect after successful submission
+                    // window.location.href = 'connexion.html';
+                }, 1000);
+            });
+
+            // Phone number formatting
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 10) value = value.substring(0, 10);
+                
+                let formattedValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i === 2 || i === 4 || i === 6 || i === 8) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                
+                e.target.value = formattedValue;
+            });
+        });
+    </script>
+</body>
+</html>
